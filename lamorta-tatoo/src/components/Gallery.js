@@ -3,24 +3,10 @@ import TattooCard from "./TattooCard";
 function Gallery() {
   return (
     <section>
-      <h2>Trabalhos</h2>
-
       <TattooCard
-        image="https://picsum.photos/400"
+        image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9mzI36v_YTbRq2mTGMi3fAEOVxuqFE0ppmg&s"
         title="Blackwork"
         description="Estilo pesado com contraste forte."
-      />
-
-      <TattooCard
-        image="https://picsum.photos/401"
-        title="Old School"
-        description="Traço clássico e cores vibrantes."
-      />
-
-      <TattooCard
-        image="https://picsum.photos/402"
-        title="Realismo"
-        description="Detalhes realistas e profundidade."
       />
     </section>
   );

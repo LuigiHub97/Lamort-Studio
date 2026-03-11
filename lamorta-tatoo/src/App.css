@@ -1,87 +1,93 @@
+/* Fundo total preto */
+html,
 body {
+  background-color: #000;
   margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  background-color: #0e0e0e;
+  padding: 0;
+}
+
+/* Container principal */
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: Arial, sans-serif;
   color: white;
+  min-height: 100vh;
+  padding-bottom: 100px; /* espaço para rodapé */
 }
 
-/* navbar */
-
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  padding: 20px;
-  background: black;
-}
-
-.navbar ul {
-  display: flex;
-  list-style: none;
-  gap: 20px;
-}
-
-/* hero */
-
+/* Hero */
 .hero {
-  text-align: center;
-  padding: 80px 20px;
-  background-image: url("https://images.unsplash.com/photo-1542728928-1413d1894ed1");
+  width: 100%;
+  max-width: 1200px;
+  padding: 60px 20px;
+  background-image: url("https://images.unsplash.com/photo-1598371839696-5c5bb00bdc28");
   background-size: cover;
   background-position: center;
-}
-
-.hero h1 {
-  font-size: 48px;
-}
-
-/* sobre */
-
-.about {
-  padding: 60px;
+  color: white;
   text-align: center;
-}
-
-/* galeria */
-
-.gallery {
-  padding: 60px;
-}
-
-.gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 30px;
-}
-
-.tattoo-card {
-  background: #1b1b1b;
   border-radius: 10px;
-  overflow: hidden;
-  transition: transform 0.3s;
+  margin-bottom: 80px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
 }
 
-.tattoo-card:hover {
+/* Galeria */
+.gallery {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  max-width: 1000px;
+  margin-bottom: 40px;
+}
+
+.gallery img {
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 10px;
+  transition: transform 0.2s;
+}
+
+.gallery img:hover {
   transform: scale(1.05);
 }
 
-.tattoo-card img {
-  width: 100%;
-  height: 250px;
-  object-fit: cover;
-}
-
-.tattoo-card h3 {
-  margin: 10px;
-}
-
-.tattoo-card p {
-  margin: 10px;
-}
-
-/* footer */
-
+/* Rodapé */
 .footer {
-  text-align: center;
-  padding: 40px;
-  background: black;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between; /* mantém distância */
+  align-items: center;
+  padding: 20px 40px;
+  background-color: #000;
+}
+
+/* Links do rodapé */
+.footer a {
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 16px;
+  transition: transform 0.2s;
+}
+
+.footer a:hover {
+  transform: translateY(-3px);
+}
+
+/* Cores oficiais separadas */
+.footer-facebook {
+  color: #1877f2; /* azul Facebook */
+}
+
+.footer-instagram {
+  color: #c13584; /* rosa/roxo Instagram */
+}
+
+.footer-whatsapp {
+  color: #25d366; /* verde WhatsApp */
 }
