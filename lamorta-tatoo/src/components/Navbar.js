@@ -1,13 +1,7 @@
 function Navbar() {
   return (
-    <nav className="navbar">
+    <nav>
       <h2>LaMort</h2>
-
-      <ul>
-        <li>Home</li>
-        <li>Galeria</li>
-        <li>Contato</li>
-      </ul>
     </nav>
   );
 }
