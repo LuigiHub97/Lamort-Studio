@@ -1,7 +1,4 @@
 import "./App.css";
-import Navbar from "./components/Navbar";
-import Gallery from "./components/Gallery";
-import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -11,7 +8,6 @@ function App() {
         <h1>Lamort Tattoo Studio</h1>
         <p>Especialista em blackwork</p>
       </div>
-
       {/* Galeria de tatuagens */}
       <div className="gallery">
         <img
@@ -27,26 +23,30 @@ function App() {
           alt="Tattoo 2"
         />
       </div>
-
       <footer className="footer">
         <a
-          href="https://www.facebook.com"
+          href="https://www.threads.com/@lamort.ink"
           target="_blank"
-          className="footer-icon"
+          rel="noopener noreferrer"
+          className="footer-threads"
         >
-          Facebook
+          Threads
         </a>
+
         <a
-          href="https://www.instagram.com"
+          href="https://www.instagram.com/lamort.ink/"
           target="_blank"
-          className="footer-icon"
+          rel="noopener noreferrer"
+          className="footer-instagram"
         >
           Instagram
         </a>
+
         <a
           href="https://wa.me/5511999999999"
           target="_blank"
-          className="footer-icon"
+          rel="noopener noreferrer"
+          className="footer-whatsapp"
         >
           WhatsApp
         </a>
