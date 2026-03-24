@@ -1,0 +1,6 @@
+{
+  "tattoos": [
+    { "id": 1, "image_url": "teste1" },
+    { "id": 2, "image_url": "teste2" }
+  ]
+}

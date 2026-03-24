@@ -1,8 +1,14 @@
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import { render, screen } from "@testing-library/react";
+import App from "./App";
 
-test('renders learn react link', () => {
+test("renders Lamort Tattoo Studio title", () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  const titleElement = screen.getByText(/Lamort Tattoo Studio/i);
+  expect(titleElement).toBeInTheDocument();
+});
+
+test("renders blackwork subtitle", () => {
+  render(<App />);
+  const subtitleElement = screen.getByText(/Especialista em blackwork/i);
+  expect(subtitleElement).toBeInTheDocument();
 });
