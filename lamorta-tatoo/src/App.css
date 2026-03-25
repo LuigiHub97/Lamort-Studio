@@ -133,3 +133,13 @@ body {
 .footer-whatsapp {
   color: #25d366; /* verde WhatsApp */
 }
+
+.hero img {
+  width: 100px;
+  max-width: 600px;
+  height: 180px;
+
+  margin-bottom: 10px;
+
+  filter: drop-shadow(0 0 20px rgba(168, 0, 255, 0.7));
+}

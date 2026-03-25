@@ -5,10 +5,13 @@ function Galeria() {
 
   useEffect(() => {
     fetch(
-      "https://jubilant-space-memory-r7wwpw5x6prhw5pj-3000.app.github.dev/api/galeria",
+      "https://jubilant-space-memory-r7wwpw5x6prhw5pj-5000.app.github.dev/api/galeria",
     )
       .then((res) => res.json())
-      .then((data) => setItens(data.tattoos))
+      .then((data) => {
+        console.log(data);
+        setItens(data);
+      })
       .catch((err) => console.error("Erro ao buscar galeria:", err));
   }, []);
 
@@ -16,8 +19,8 @@ function Galeria() {
     <div className="gallery">
       {itens.map((item) => (
         <div key={item.id} className="galeria-item">
-          <h3>{item.Name}</h3>
-          <img src={item.image_url} alt={item.Name} />
+          <h3>{item.nome}</h3>
+          <img src={item.imagem} alt={item.nome} />
         </div>
       ))}
     </div>

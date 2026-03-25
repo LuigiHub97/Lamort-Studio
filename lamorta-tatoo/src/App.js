@@ -6,6 +6,7 @@ function App() {
     <div className="App">
       {/* Hero */}
       <div className="hero">
+        <img src="/Logo.jpg" alt="Logo" />
         <h1>Lamort Tattoo Studio</h1>
         <p>Especialista em blackwork</p>
       </div>
