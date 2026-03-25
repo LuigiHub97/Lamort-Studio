@@ -1,17 +1,7 @@
 import "./App.css";
-import { useEffect, useState } from "react";
+import Galeria from "./galeria";
 
 function App() {
-  const [tattoos, setTattoos] = useState([]);
-
-  useEffect(() => {
-    fetch(
-      "https://jubilant-space-memory-r7wwpw5x6prhw5pj-3000.app.github.dev/api/tattoos",
-    )
-      .then((res) => res.json())
-      .then((data) => setTattoos(data));
-  }, []);
-
   return (
     <div className="App">
       {/* Hero */}
@@ -21,11 +11,7 @@ function App() {
       </div>
 
       {/* Galeria */}
-      <div className="gallery">
-        {tattoos.map((t) => (
-          <img key={t.id} src={t.image_url} alt="tattoo" />
-        ))}
-      </div>
+      <Galeria />
     </div>
   );
 }

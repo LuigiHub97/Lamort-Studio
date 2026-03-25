@@ -18,13 +18,14 @@ app.get("/api/test", (req, res) => {
 });
 
 // Rota GET da galeria (dados fixos por enquanto)
-app.get("/api/galeria", (req, res) => {
-  const galeria = [
-    { id: 1, nome: "Tatuagem Blackwork 1", imagem: "url-da-imagem-1" },
-    { id: 2, nome: "Tatuagem Blackwork 2", imagem: "url-da-imagem-2" },
-    { id: 3, nome: "Tatuagem Blackwork 3", imagem: "url-da-imagem-3" },
-  ];
-  res.json(galeria);
+app.get("/api/galeria", async (req, res) => {
+  try {
+    const resultado = await pool.query("SELECT * FROM galeria");
+    res.json(resultado.rows);
+  } catch (err) {
+    console.error("Erro ao buscar galeria:", err);
+    res.status(500).json({ error: "Erro ao buscar galeria" });
+  }
 });
 
 pool.query("SELECT NOW()", (err, res) => {
