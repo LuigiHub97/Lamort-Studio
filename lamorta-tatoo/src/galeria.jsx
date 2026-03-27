@@ -1,28 +1,53 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 function Galeria() {
-  const [items, setItens] = useState([]);
+  const [galeria, setGaleria] = useState([]);
+  const [aberta, setAberta] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    fetch(
-      "https://animated-space-zebra-pjvxv97p5rqqf7ppg-5000.app.github.dev/api/galeria",
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        setItens(data);
-      })
-      .catch((err) => console.error("Erro ao buscar galeria:", err));
-  }, []);
+  async function abrirGaleria() {
+    try {
+      setAberta(true);
+      setLoading(true);
+
+      const res = await fetch(
+        "https://animated-space-zebra-pjvxv97p5rqqf7ppg-5000.app.github.dev/api/galeria",
+      );
+
+      const data = await res.json();
+      setGaleria(data);
+    } catch (err) {
+      console.log("Erro ao carregar galeria:", err);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  function fecharGaleria() {
+    setAberta(false);
+  }
 
   return (
-    <div className="gallery">
-      {items.map((items) => (
-        <div key={items.id} className="galeria-items">
-          <h3>{items.nome}</h3>
-          <img src={items.imagem} alt={items.nome} />
+    <div>
+      {/* BOTÃO ABRIR */}
+      <button onClick={abrirGaleria}>Galeria</button>
+
+      {/* MODAL / TELA DA GALERIA */}
+      {aberta && (
+        <div className="galeria-overlay">
+          <button className="close-btn" onClick={fecharGaleria}>
+            Fechar
+          </button>
+
+          {loading && <p>Carregando galeria...</p>}
+
+          <div className="galeria-container">
+            {galeria.map((item) => (
+              <img key={item.id} src={item.url} alt="tattoo" />
+            ))}
+          </div>
         </div>
-      ))}
+      )}
     </div>
   );
 }

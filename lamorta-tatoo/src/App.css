@@ -1,238 +1,234 @@
-html,
-body {
+* {
   margin: 0;
   padding: 0;
-
-  background:
-    linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.85)),
-    url("../public/background-lamort.jpg");
-
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-/* Container principal */
-.App {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
+body {
+  margin: 0;
+  background: url("../public/background-lamort.jpg") center/cover no-repeat
+    fixed;
+  color: #eae6ff;
+  font-family: "Arial", sans-serif;
 }
 
-.header {
-  position: absolute; /* 👈 FICA POR CIMA */
-  top: 0;
-  left: 0;
-
-  width: 100%;
-
-  display: flex;
-  justify-content: center;
-
-  padding: 20px;
-
-  z-index: 10; /* garante que fica acima do hero */
-}
-
-.hero {
-  height: 100vh;
-  width: 100%;
-
-  background-image: url("../public/background-lamort.jpg"); /* usa a melhor imagem que tiver */
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-
-  position: relative;
-  padding-left: 80px;
-}
-
-.hero::before {
+/* CAMADA MÍSTICA (não preto morto) */
+body::before {
   content: "";
-  position: absolute;
+  position: fixed;
   inset: 0;
 
-  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.85));
+  background:
+    radial-gradient(
+      circle at 20% 30%,
+      rgba(138, 43, 226, 0.25),
+      transparent 40%
+    ),
+    radial-gradient(circle at 80% 70%, rgba(75, 0, 130, 0.35), transparent 45%),
+    radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.92));
+
+  z-index: 0;
+  pointer-events: none;
 }
 
-.hero h1 {
-  font-size: 72px;
-  font-weight: bold;
-
-  letter-spacing: 6px;
-
-  text-transform: uppercase;
-
-  background: linear-gradient(90deg, #fff, #a800ff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-
-  margin: 0;
-}
-
-.hero-content {
+/* tudo acima */
+.App {
   position: relative;
   z-index: 1;
-  text-align: center;
-  color: white;
 }
 
-.hero-content h1 {
-  font-size: 72px;
-  letter-spacing: 8px;
-  margin: 0;
-
-  text-shadow: 0 0 20px rgba(168, 0, 255, 0.8);
+/* Garante que tudo fique acima do escuro */
+.App {
+  position: relative;
+  z-index: 1;
 }
 
-.hero-social a,
-.hero-links a {
-  display: block;
-  padding: 10px 14px;
-  border: 1px solid rgba(138, 43, 226, 0.6);
-  background: rgba(138, 43, 226, 0.1);
-  color: #b57cff;
-  text-decoration: none;
-  border-radius: 8px;
+.App {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100vh;
+}
+
+/* HERO */
+.hero {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+
+  padding-left: 80px; /* <- BOTÕES À ESQUERDA */
 }
 
 .hero-content {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 25px;
-  padding-top: 60px;
+  gap: 18px;
+  align-items: flex-start;
 }
 
-.hero button {
-  padding: 14px 32px;
-
-  border-radius: 40px;
-  border: 1px solid rgba(168, 0, 255, 0.5);
-
-  background: transparent;
-  color: white;
-
-  font-size: 14px;
-  letter-spacing: 2px;
-
-  cursor: pointer;
-
-  position: relative;
-  overflow: hidden;
-
-  transition: 0.3s;
-}
-
-.hero button {
-  z-index: 1;
-}
-.hero button span {
-  position: relative;
-  z-index: 2;
-}
-
-.hero-btn:hover {
-  background: rgba(168, 0, 255, 0.2);
-
-  box-shadow:
-    0 0 10px rgba(168, 0, 255, 0.6),
-    0 0 20px rgba(168, 0, 255, 0.4);
-}
-
+/* TITULO */
 .hero h1 {
-  font-size: 38px;
-  letter-spacing: 2px;
+  font-size: 70px;
+  letter-spacing: 8px;
+  text-shadow: 0 0 20px rgba(170, 0, 255, 0.6);
 }
 
 .hero p {
-  color: #cfcfcf;
+  font-size: 16px;
+  letter-spacing: 4px;
+  opacity: 0.8;
 }
 
-/* Galeria */
-.gallery {
+/* BOTÃO PRINCIPAL */
+.hero button {
+  padding: 14px 28px;
+  border-radius: 30px;
+
+  border: 1px solid rgba(180, 0, 255, 0.6);
+  background: rgba(80, 0, 120, 0.2);
+  color: white;
+
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.hero button:hover {
+  background: rgba(140, 0, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+/* BOTÕES MENU (ESQUERDA LIMPA) */
+.hero-links {
   display: flex;
-  justify-content: center;
-  gap: 20px;
-  flex-wrap: wrap;
-  max-width: 1000px;
-  margin-bottom: 40px;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
 }
 
-.gallery img {
-  width: 260px;
-  height: 260px;
+.hero-links button {
+  width: 180px;
+  padding: 10px 14px;
 
-  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid rgba(180, 0, 255, 0.4);
 
-  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.4);
+  color: white;
 
-  border: 2px solid rgba(255, 255, 255, 0.08);
-
-  transition:
-    transform 0.25s,
-    box-shadow 0.25s;
+  cursor: pointer;
+  transition: 0.2s;
 }
 
-.gallery img:hover {
-  transform: scale(1.07);
-
-  box-shadow:
-    0 10px 30px rgba(0, 0, 0, 0.8),
-    0 0 15px rgba(168, 0, 255, 0.6);
+.hero-links button:hover {
+  background: rgba(140, 0, 255, 0.25);
+  transform: translateX(5px);
 }
 
-/* Rodapé */
-.footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-
-  width: 100%;
-
+/* LINKS SOCIAIS (VOLTOU INSTAGRAM / THREADS / FACEBOOK) */
+.hero-social {
   display: flex;
-  justify-content: center;
-  gap: 50px;
-
-  padding: 15px;
-
-  background: rgba(0, 0, 0, 0.8);
-  backdrop-filter: blur(6px);
-
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  gap: 12px;
+  margin-top: 20px;
 }
 
-/* Links do rodapé */
-.footer a {
+.hero-social a {
+  padding: 8px 12px;
+  border-radius: 6px;
+
   text-decoration: none;
-  font-weight: bold;
+  color: white;
+
+  border: 1px solid rgba(180, 0, 255, 0.4);
+  background: rgba(0, 0, 0, 0.4);
 
   transition: 0.2s;
 }
 
-.footer a:hover {
+.hero-social a:hover {
+  background: rgba(140, 0, 255, 0.25);
+}
+
+.card {
+  background: rgba(25, 0, 40, 0.45);
+  border: 1px solid rgba(160, 80, 255, 0.25);
+  border-radius: 20px;
+
+  backdrop-filter: blur(10px);
+
+  box-shadow:
+    0 0 20px rgba(120, 0, 255, 0.15),
+    inset 0 0 20px rgba(120, 0, 255, 0.08);
+
+  transition: 0.35s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px) scale(1.02);
+
+  box-shadow:
+    0 0 35px rgba(150, 60, 255, 0.35),
+    0 0 80px rgba(120, 0, 255, 0.15);
+}
+
+.social-icons {
+  display: flex;
+  gap: 18px;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.social-icons a {
+  color: #b56bff;
+  font-size: 24px;
+
+  transition: 0.3s ease;
+}
+
+.social-icons a:hover {
+  color: #d7a6ff;
+  transform: translateY(-3px) scale(1.1);
+  text-shadow: 0 0 10px rgba(180, 100, 255, 0.7);
+}
+
+.agendar-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 12px 18px;
+  margin-bottom: 15px; /* separa do menu */
+
+  border-radius: 14px;
+
+  background: rgba(20, 0, 30, 0.65); /* dark roxo profundo */
+  border: 1px solid rgba(140, 60, 255, 0.25);
+
+  color: #e8ddff;
+  text-decoration: none;
+
+  backdrop-filter: blur(10px);
+
+  transition: 0.3s ease;
+
+  position: relative;
+  overflow: hidden;
+}
+
+/* glow verde sutil (whatsapp energy, mas controlado) */
+.agendar-btn svg {
+  color: #25d366;
+}
+
+/* efeito hover mais vivo */
+.agendar-btn:hover {
   transform: translateY(-3px);
 
-  text-shadow:
-    0 0 10px currentColor,
-    0 0 20px currentColor;
-}
+  border: 1px solid rgba(37, 211, 102, 0.35);
 
-/* Cores oficiais separadas */
-.footer-facebook {
-  color: #1877f2; /* azul Facebook */
-}
-
-.footer-instagram {
-  color: #c13584; /* rosa/roxo Instagram */
-}
-
-.footer-whatsapp {
-  color: #25d366; /* verde WhatsApp */
+  box-shadow:
+    0 0 18px rgba(37, 211, 102, 0.18),
+    0 0 35px rgba(140, 60, 255, 0.25);
 }
