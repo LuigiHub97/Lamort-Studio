@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 5000;
 app.use(
   cors({
     origin:
-      "https://jubilant-space-memory-r7wwpw5x6prhw5pj-3000.app.github.dev",
+      "https://animated-space-zebra-pjvxv97p5rqqf7ppg-3000.app.github.dev",
   }),
 );
 app.use(express.json());

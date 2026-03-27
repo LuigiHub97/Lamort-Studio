@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 
 function Galeria() {
-  const [itens, setItens] = useState([]);
+  const [items, setItens] = useState([]);
 
   useEffect(() => {
     fetch(
-      "https://jubilant-space-memory-r7wwpw5x6prhw5pj-5000.app.github.dev/api/galeria",
+      "https://animated-space-zebra-pjvxv97p5rqqf7ppg-5000.app.github.dev/api/galeria",
     )
       .then((res) => res.json())
       .then((data) => {
@@ -17,10 +17,10 @@ function Galeria() {
 
   return (
     <div className="gallery">
-      {itens.map((item) => (
-        <div key={item.id} className="galeria-item">
-          <h3>{item.nome}</h3>
-          <img src={item.imagem} alt={item.nome} />
+      {items.map((items) => (
+        <div key={items.id} className="galeria-items">
+          <h3>{items.nome}</h3>
+          <img src={items.imagem} alt={items.nome} />
         </div>
       ))}
     </div>
