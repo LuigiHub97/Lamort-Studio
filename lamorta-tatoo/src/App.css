@@ -17,30 +17,133 @@ body {
 .App {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  font-family: Arial, sans-serif;
-  color: white;
-  min-height: 100vh;
-  padding-bottom: 100px; /* espaço para rodapé */
+  align-items: stretch;
 }
 
-/* Hero */
-.hero {
+.header {
+  position: absolute; /* 👈 FICA POR CIMA */
+  top: 0;
+  left: 0;
+
   width: 100%;
-  max-width: 1100px;
 
-  padding: 70px 20px;
+  display: flex;
+  justify-content: center;
 
-  background: rgba(36, 0, 37, 0.65);
-  backdrop-filter: blur(2px);
+  padding: 20px;
 
+  z-index: 10; /* garante que fica acima do hero */
+}
+
+.hero {
+  height: 100vh;
+  width: 100%;
+
+  background-image: url("../public/background-lamort.jpg"); /* usa a melhor imagem que tiver */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  position: relative;
+  padding-left: 80px;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.85));
+}
+
+.hero h1 {
+  font-size: 72px;
+  font-weight: bold;
+
+  letter-spacing: 6px;
+
+  text-transform: uppercase;
+
+  background: linear-gradient(90deg, #fff, #a800ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  margin: 0;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
   text-align: center;
-  border-radius: 12px;
+  color: white;
+}
 
-  margin-top: 40px;
-  margin-bottom: 60px;
+.hero-content h1 {
+  font-size: 72px;
+  letter-spacing: 8px;
+  margin: 0;
 
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+  text-shadow: 0 0 20px rgba(168, 0, 255, 0.8);
+}
+
+.hero-social a,
+.hero-links a {
+  display: block;
+  padding: 10px 14px;
+  border: 1px solid rgba(138, 43, 226, 0.6);
+  background: rgba(138, 43, 226, 0.1);
+  color: #b57cff;
+  text-decoration: none;
+  border-radius: 8px;
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 25px;
+  padding-top: 60px;
+}
+
+.hero button {
+  padding: 14px 32px;
+
+  border-radius: 40px;
+  border: 1px solid rgba(168, 0, 255, 0.5);
+
+  background: transparent;
+  color: white;
+
+  font-size: 14px;
+  letter-spacing: 2px;
+
+  cursor: pointer;
+
+  position: relative;
+  overflow: hidden;
+
+  transition: 0.3s;
+}
+
+.hero button {
+  z-index: 1;
+}
+.hero button span {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-btn:hover {
+  background: rgba(168, 0, 255, 0.2);
+
+  box-shadow:
+    0 0 10px rgba(168, 0, 255, 0.6),
+    0 0 20px rgba(168, 0, 255, 0.4);
 }
 
 .hero h1 {
@@ -132,14 +235,4 @@ body {
 
 .footer-whatsapp {
   color: #25d366; /* verde WhatsApp */
-}
-
-.hero img {
-  width: 100px;
-  max-width: 600px;
-  height: 180px;
-
-  margin-bottom: 10px;
-
-  filter: drop-shadow(0 0 20px rgba(168, 0, 255, 0.7));
 }
