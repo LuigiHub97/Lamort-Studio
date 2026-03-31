@@ -13,11 +13,17 @@ function App() {
       setSecao("galeria");
       setLoading(true);
 
-      const res = await fetch(
-        "https://animated-space-zebra-pjvxv97p5rqqf7ppg-5000.app.github.dev/api/galeria",
-      );
+      const res = await fetch("http://localhost:5000/api/galeria");
+
+      if (!res.ok) {
+        throw new Error("Erro ao buscar galeria");
+      }
 
       const data = await res.json();
+
+      // DEBUG (pode remover depois)
+      console.log("GALERIA API:", data);
+
       setImagens(data);
     } catch (err) {
       console.log("Erro galeria:", err);
@@ -32,7 +38,8 @@ function App() {
 
   return (
     <div className="App">
-      {/* HERO FIXO */}
+
+      {/* HERO */}
       <div className="hero">
         <div className="hero-content">
           <h1>LAMORT</h1>
@@ -57,64 +64,79 @@ function App() {
             <button onClick={() => setSecao("studio")}>Studio</button>
           </div>
 
-          {/* SOCIAL (NÃO SUME MAIS) */}
+          {/* SOCIAL */}
           <div className="social-icons">
-            <a
-              href="https://instagram.com/lamort.ink"
-              target="_blank"
-              rel="noreferrer"
-            >
+            <a href="https://instagram.com/lamort.ink" target="_blank" rel="noreferrer">
               <FaInstagram />
             </a>
 
-            <a
-              href="https://www.threads.net/@lamort.ink"
-              target="_blank"
-              rel="noreferrer"
-            >
+            <a href="https://www.threads.net/@lamort.ink" target="_blank" rel="noreferrer">
               <SiThreads />
             </a>
 
-            <a
-              href="https://facebook.com/lamort.studio"
-              target="_blank"
-              rel="noreferrer"
-            >
+            <a href="https://facebook.com/lamort.studio" target="_blank" rel="noreferrer">
               <FaFacebook />
             </a>
           </div>
+
         </div>
       </div>
 
-      {/* ÁREA CENTRAL FIXA */}
+      {/* CONTEÚDO CENTRAL */}
       <div className="main-center">
-        {secao === "historia" && (
-          <p style={{ color: "white" }}>História do estúdio aqui...</p>
+
+        {secao === "home" && (
+          <p style={{ color: "white" }}>
+            Bem-vindo ao Lamort Tattoo Studio
+          </p>
         )}
 
-        {secao === "tatuador" && (
-          <p style={{ color: "white" }}>Informações do tatuador aqui...</p>
+        {secao === "historia" && (
+          <p style={{ color: "white" }}>Quem somos...</p>
         )}
 
         {secao === "studio" && (
-          <p style={{ color: "white" }}>Informações do studio aqui...</p>
+          <p style={{ color: "white" }}>Studio info...</p>
+        )}
+
+        {secao === "tatuador" && (
+          <p style={{ color: "white" }}>Tatuador info...</p>
         )}
 
         {secao === "galeria" && (
           <div className="galeria-wrapper">
-            {loading && <p style={{ color: "white" }}>Carregando...</p>}
+
+            {loading && (
+              <p style={{ color: "white" }}>Carregando galeria...</p>
+            )}
 
             <div className="galeria-container">
-              {imagens.map((img, i) => (
-                <img
-                  key={img.id || i}
-                  src={img.url || img.image || img.src || img.path}
-                  alt="tattoo"
-                />
+
+              {imagens.length === 0 && !loading && (
+                <p style={{ color: "white" }}>
+                  Nenhuma imagem encontrada
+                </p>
+              )}
+
+              {imagens.map((img) => (
+                <div key={img.id} className="galeria-item">
+
+                  <img
+                    src={`http://localhost:3000${img.nome}`}
+                    alt={img.titulo}
+                  />
+
+                  <p style={{ color: "white" }}>
+                    {img.titulo}
+                  </p>
+
+                </div>
               ))}
+
             </div>
           </div>
         )}
+
       </div>
     </div>
   );

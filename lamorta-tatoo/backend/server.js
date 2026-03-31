@@ -9,12 +9,8 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.use(
-  cors({
-    origin:
-      "https://animated-space-zebra-pjvxv97p5rqqf7ppg-3000.app.github.dev",
-  }),
-);
+app.use(cors());
+;
 app.use(express.json());
 
 // Rota de teste
