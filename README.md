@@ -20,6 +20,7 @@ JavaScript
 HTML5
 CSS3
 API REST
+
 ⚙️ O que o projeto faz
 Navegação por seções (sem recarregar a página)
 Galeria dinâmica carregada via API
@@ -27,6 +28,7 @@ Modal para visualizar imagens maiores
 Navegação por teclado no modal
 Layout responsivo
 Conteúdo exibido apenas quando necessário (menu lateral + painel)
+
 🔌 API
 A galeria consome dados de uma API local:
 
@@ -34,7 +36,9 @@ http://localhost:5000/api/galeria
 
 As imagens são carregadas dinamicamente e exibidas em grid.
 
+
 📦 Como rodar
+
 git clone https://github.com/LuigiHub97/Lamort-Studio
 cd Lamort-Studio
 npm install
