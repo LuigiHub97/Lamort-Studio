@@ -1,70 +1,60 @@
-# Getting Started with Create React App
+# 🖤 Lamort Tattoo Studio
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Projeto de site para um estúdio de tatuagem, desenvolvido com foco em identidade visual forte e experiência mais imersiva.
 
-## Available Scripts
+A ideia principal foi fugir de site “cheio de informação” e criar algo mais limpo, onde o conteúdo aparece conforme o usuário interage, deixando o visual em destaque.
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## 🧠 Sobre o projeto
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Esse projeto surgiu como prática de front-end, mas acabou evoluindo para algo mais próximo de um projeto real.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Durante o desenvolvimento, trabalhei bastante em:
+- organização da interface
+- navegação por seções
+- consumo de API
+- ajustes de layout com base em feedback
 
-### `npm test`
+A principal mudança foi reduzir a quantidade de conteúdo visível na tela e dar mais espaço para o fundo e a identidade visual.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## 💻 Tecnologias
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- React  
+- JavaScript  
+- HTML5  
+- CSS3  
+- API REST  
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## ⚙️ O que o projeto faz
 
-### `npm run eject`
+- Navegação por seções (sem recarregar a página)
+- Galeria dinâmica carregada via API
+- Modal para visualizar imagens maiores
+- Navegação por teclado no modal
+- Layout responsivo
+- Conteúdo exibido apenas quando necessário (menu lateral + painel)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 🔌 API
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+A galeria consome dados de uma API local:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+http://localhost:5000/api/galeria
 
-## Learn More
+As imagens são carregadas dinamicamente e exibidas em grid.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 📦 Como rodar
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```bash
+git clone https://github.com/LuigiHub97/Lamort-Studio
+cd Lamort-Studio
+npm install
+npm start

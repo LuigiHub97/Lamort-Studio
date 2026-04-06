@@ -4,18 +4,42 @@ import {
   FaInstagram,
   FaFacebook,
   FaWhatsapp,
-  FaArrowRight,
+  FaTimes,
+  FaChevronLeft,
+  FaChevronRight,
 } from "react-icons/fa";
 import { SiThreads } from "react-icons/si";
 
 function App() {
-  const [secao, setSecao] = useState("home");
+  const [secao, setSecao] = useState(null);
   const [imagens, setImagens] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [modalAberto, setModalAberto] = useState(false);
+  const [imagemAtual, setImagemAtual] = useState(0);
 
   useEffect(() => {
-    carregarGaleria();
-  }, []);
+    function handleKeyDown(e) {
+      if (!modalAberto) return;
+
+      if (e.key === "Escape") {
+        fecharModal();
+      }
+
+      if (e.key === "ArrowRight") {
+        proximaImagem();
+      }
+
+      if (e.key === "ArrowLeft") {
+        imagemAnterior();
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [modalAberto, imagens.length]);
 
   async function carregarGaleria() {
     try {
@@ -37,87 +61,92 @@ function App() {
     }
   }
 
-  async function abrirGaleria() {
-    setSecao("galeria");
+  async function abrirSecao(nome) {
+    setSecao(nome);
 
-    if (imagens.length === 0) {
+    if (nome === "galeria" && imagens.length === 0) {
       await carregarGaleria();
     }
   }
 
-  function abrirHome() {
-    setSecao("home");
+  function fecharPainel() {
+    setSecao(null);
   }
 
-  function abrirHistoria() {
-    setSecao("historia");
+  function abrirModal(index) {
+    setImagemAtual(index);
+    setModalAberto(true);
   }
 
-  function abrirTatuador() {
-    setSecao("tatuador");
+  function fecharModal() {
+    setModalAberto(false);
   }
 
-  function abrirStudio() {
-    setSecao("studio");
+  function proximaImagem() {
+    if (imagens.length === 0) return;
+    setImagemAtual((prev) => (prev + 1) % imagens.length);
   }
 
-  const imagemDestaque = "/images/Logo.jpg";
+  function imagemAnterior() {
+    if (imagens.length === 0) return;
+    setImagemAtual((prev) => (prev - 1 + imagens.length) % imagens.length);
+  }
+
+  const secaoAtiva = (nome) => (secao === nome ? "active" : "");
 
   return (
     <div className="App">
+      <div className="background-image"></div>
+      <div className="background-overlay"></div>
+
       <aside className="sidebar">
         <div className="sidebar-content">
-          <div className="brand-block">
-            <h1>LAMORT</h1>
-            <p>TATTOO STUDIO</p>
+          <div className="sidebar-top">
+            <div className="brand-block">
+              <h1>LAMORT</h1>
+              <p>TATTOO STUDIO</p>
+            </div>
+
+            <a
+              href="https://wa.me/5511913490538"
+              target="_blank"
+              rel="noreferrer"
+              className="agendar-btn"
+            >
+              <FaWhatsapp />
+              <span>AGENDAR SESSÃO</span>
+            </a>
+
+            <nav className="nav-menu">
+              <button
+                className={secaoAtiva("galeria")}
+                onClick={() => abrirSecao("galeria")}
+              >
+                Galeria
+              </button>
+
+              <button
+                className={secaoAtiva("historia")}
+                onClick={() => abrirSecao("historia")}
+              >
+                História
+              </button>
+
+              <button
+                className={secaoAtiva("tatuador")}
+                onClick={() => abrirSecao("tatuador")}
+              >
+                Tatuador
+              </button>
+
+              <button
+                className={secaoAtiva("studio")}
+                onClick={() => abrirSecao("studio")}
+              >
+                Studio
+              </button>
+            </nav>
           </div>
-
-          <a
-            href="https://wa.me/5511913490538"
-            target="_blank"
-            rel="noreferrer"
-            className="agendar-btn"
-          >
-            <FaWhatsapp />
-            <span>AGENDAR SESSÃO</span>
-          </a>
-
-          <nav className="nav-menu">
-            <button
-              className={secao === "home" ? "active" : ""}
-              onClick={abrirHome}
-            >
-              Home
-            </button>
-
-            <button
-              className={secao === "galeria" ? "active" : ""}
-              onClick={abrirGaleria}
-            >
-              Galeria
-            </button>
-
-            <button
-              className={secao === "historia" ? "active" : ""}
-              onClick={abrirHistoria}
-            >
-              História
-            </button>
-
-            <button
-              className={secao === "tatuador" ? "active" : ""}
-              onClick={abrirTatuador}
-            >
-              Tatuador
-            </button>
-
-            <button
-              className={secao === "studio" ? "active" : ""}
-              onClick={abrirStudio}
-            >
-              Studio
-            </button>
-          </nav>
 
           <div className="sidebar-footer">
             <div className="social-icons">
@@ -156,244 +185,209 @@ function App() {
         </div>
       </aside>
 
-      <main className="content-area">
-        {secao === "home" && (
-          <section className="home-layout">
-            <div
-              className="hero-panel hero-panel-image"
-              style={{
-                backgroundImage: `
-                  linear-gradient(
-                    90deg,
-                    rgba(10, 0, 18, 0.96) 0%,
-                    rgba(18, 0, 30, 0.88) 35%,
-                    rgba(25, 0, 40, 0.72) 60%,
-                    rgba(8, 0, 14, 0.92) 100%
-                  ),
-                  linear-gradient(
-                    180deg,
-                    rgba(120, 0, 255, 0.10),
-                    rgba(0, 0, 0, 0.25)
-                  ),
-                  url(${imagemDestaque})
-                `,
-              }}
-            >
-              <span className="small-tag">LAMORT EXPERIENCE</span>
+      <main className="stage">
+        {!secao && (
+          <section className="home-hero">
+            <span className="small-tag">LAMORT EXPERIENCE</span>
+            <h2>
+              ARTE ESCURA,
+              <br />
+              PRESENÇA
+              <br />
+              E IDENTIDADE.
+            </h2>
+            <p>
+              Um estúdio construído para transformar estética em assinatura
+              visual. Menos ruído, mais impacto.
+            </p>
 
-              <h2>
-                TATUAGEM COM
-                <br />
-                PRESENÇA,
-                <br />
-                IDENTIDADE E
-                <br />
-                PESO.
-              </h2>
+            <div className="hero-actions">
+              <button
+                className="hero-primary"
+                onClick={() => abrirSecao("galeria")}
+              >
+                VER GALERIA
+              </button>
 
-              <p className="hero-text">
-                Um estúdio construído para transformar estética sombria em
-                assinatura visual. Cada trabalho é pensado para marcar mais do
-                que a pele: marcar presença.
-              </p>
-
-              <div className="hero-actions">
-                <button className="primary-action" onClick={abrirGaleria}>
-                  <span>VER GALERIA</span>
-                  <FaArrowRight />
-                </button>
-
-                <a
-                  href="https://wa.me/5511913490538"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="secondary-action"
-                >
-                  FALAR NO WHATSAPP
-                </a>
-              </div>
+              <button
+                className="hero-secondary"
+                onClick={() => abrirSecao("historia")}
+              >
+                CONHECER O ESTÚDIO
+              </button>
             </div>
+          </section>
+        )}
 
-            <div className="home-side-grid">
-              <div className="info-card highlight-card">
-                <span className="card-label">ESTILO</span>
-                <h3>Dark, impactante e autoral.</h3>
-                <p>
-                  Linhas fortes, atmosfera sombria e composição pensada para
-                  destacar o corpo como obra.
-                </p>
-              </div>
+        {secao && (
+          <section className="content-panel">
+            <button className="panel-close" onClick={fecharPainel}>
+              <FaTimes />
+            </button>
 
-              <div className="stats-row">
-                <div className="mini-card">
-                  <strong>Arte</strong>
-                  <span>conceito visual forte</span>
-                </div>
-
-                <div className="mini-card">
-                  <strong>Atendimento</strong>
-                  <span>experiência premium</span>
-                </div>
-              </div>
-
-              <div className="featured-preview">
-                <div className="featured-header">
-                  <span>DESTAQUES</span>
-                  <button onClick={abrirGaleria}>abrir galeria</button>
+            {secao === "galeria" && (
+              <div className="panel-inner">
+                <div className="section-top">
+                  <span className="small-tag">PORTFÓLIO</span>
+                  <h2>Galeria</h2>
+                  <p>
+                    Trabalhos selecionados do Lamort Tattoo Studio. A ideia aqui
+                    é deixar o fundo respirar e abrir o portfólio só quando a
+                    pessoa quiser ver.
+                  </p>
                 </div>
 
                 {loading && (
-                  <div className="preview-loading">Carregando prévia...</div>
-                )}
-
-                {!loading && imagens.length > 0 && (
-                  <div className="preview-grid">
-                    {imagens.slice(0, 3).map((img) => (
-                      <div key={img.id} className="preview-item">
-                        <img
-                          src={`http://localhost:3000${img.nome}`}
-                          alt={img.titulo || "Tattoo"}
-                        />
-                      </div>
-                    ))}
-                  </div>
+                  <div className="section-message">Carregando galeria...</div>
                 )}
 
                 {!loading && imagens.length === 0 && (
-                  <div className="preview-loading">Sem imagens no momento.</div>
+                  <div className="section-message">
+                    Nenhuma imagem encontrada.
+                  </div>
+                )}
+
+                {!loading && imagens.length > 0 && (
+                  <div className="galeria-grid">
+                    {imagens.map((img, index) => (
+                      <article
+                        key={img.id}
+                        className={`galeria-card ${
+                          index % 5 === 0 ? "tall" : ""
+                        }`}
+                        onClick={() => abrirModal(index)}
+                      >
+                        <img
+                          src={`http://localhost:3000${img.nome}`}
+                          alt={img.titulo || "Lamort Tattoo"}
+                        />
+
+                        <div className="galeria-overlay">
+                          <span>{img.titulo || "Lamort Tattoo"}</span>
+                        </div>
+                      </article>
+                    ))}
+                  </div>
                 )}
               </div>
-            </div>
-          </section>
-        )}
-
-        {secao === "galeria" && (
-          <section className="galeria-page">
-            <div className="section-top">
-              <span className="small-tag">PORTFÓLIO</span>
-              <h2>Galeria</h2>
-              <p>
-                Trabalhos selecionados do Lamort Tattoo Studio. Visual forte,
-                acabamento pesado e assinatura própria.
-              </p>
-            </div>
-
-            {loading && (
-              <div className="section-message">Carregando galeria...</div>
             )}
 
-            {!loading && imagens.length === 0 && (
-              <div className="section-message">Nenhuma imagem encontrada.</div>
-            )}
+            {secao === "historia" && (
+              <div className="panel-inner">
+                <div className="section-top">
+                  <span className="small-tag">IDENTIDADE</span>
+                  <h2>História</h2>
+                </div>
 
-            {!loading && imagens.length > 0 && (
-              <div className="galeria-grid">
-                {imagens.map((img, index) => (
-                  <article
-                    key={img.id}
-                    className={`galeria-card ${
-                      index % 5 === 0 ? "tall" : ""
-                    }`}
-                  >
-                    <img
-                      src={`http://localhost:3000${img.nome}`}
-                      alt={img.titulo || "Tattoo"}
-                    />
+                <div className="text-card">
+                  <p>
+                    O Lamort Tattoo Studio nasce de uma proposta simples: criar
+                    trabalhos com peso visual, atmosfera própria e identidade
+                    marcante.
+                  </p>
 
-                    <div className="galeria-overlay">
-                      <span>{img.titulo || "Lamort Tattoo"}</span>
-                    </div>
-                  </article>
-                ))}
+                  <p>
+                    Não é sobre fazer tatuagem genérica. É sobre construir peças
+                    que conversem com presença, estética e personalidade.
+                  </p>
+
+                  <p>
+                    A ideia do site agora é seguir essa mesma lógica: menos
+                    excesso na tela, mais impacto visual e conteúdo aparecendo só
+                    quando a pessoa clicar.
+                  </p>
+                </div>
               </div>
             )}
-          </section>
-        )}
 
-        {secao === "historia" && (
-          <section className="text-page">
-            <div className="section-top">
-              <span className="small-tag">IDENTIDADE</span>
-              <h2>História</h2>
-            </div>
+            {secao === "tatuador" && (
+              <div className="panel-inner">
+                <div className="section-top">
+                  <span className="small-tag">ARTISTA</span>
+                  <h2>Tatuador</h2>
+                </div>
 
-            <div className="text-card">
-              <p>
-                O Lamort Tattoo Studio nasce de uma proposta simples: criar
-                trabalhos com peso visual, atmosfera própria e identidade
-                marcante.
-              </p>
+                <div className="text-card">
+                  <p>
+                    Esse espaço é para apresentar a visão artística, os estilos
+                    preferidos, a forma de construir cada peça e o cuidado com o
+                    processo.
+                  </p>
 
-              <p>
-                Não é sobre fazer tatuagem genérica. É sobre construir peças
-                que conversem com presença, estética e personalidade.
-              </p>
+                  <p>
+                    Em vez de encher a tela de texto, o ideal aqui é manter uma
+                    apresentação forte, curta e com personalidade.
+                  </p>
 
-              <p>
-                Aqui você pode contar a origem do estúdio, a visão artística, a
-                inspiração do nome Lamort e o tipo de experiência que o cliente
-                vive ao entrar no espaço.
-              </p>
-            </div>
-          </section>
-        )}
+                  <p>
+                    Depois a gente pode lapidar esse texto com mais cara de marca
+                    premium e menos cara de texto genérico de portfólio.
+                  </p>
+                </div>
+              </div>
+            )}
 
-        {secao === "tatuador" && (
-          <section className="text-page">
-            <div className="section-top">
-              <span className="small-tag">ARTISTA</span>
-              <h2>Tatuador</h2>
-            </div>
+            {secao === "studio" && (
+              <div className="panel-inner">
+                <div className="section-top">
+                  <span className="small-tag">ESPAÇO</span>
+                  <h2>Studio</h2>
+                </div>
 
-            <div className="text-card">
-              <p>
-                Esse espaço é para sua apresentação profissional. Aqui entra sua
-                visão, seus estilos preferidos, especialidades e a forma como
-                você constrói cada projeto.
-              </p>
+                <div className="text-card">
+                  <p>
+                    Aqui entra o ambiente, a estrutura, os cuidados com higiene e
+                    a experiência do cliente dentro do estúdio.
+                  </p>
 
-              <p>
-                Em vez de escrever igual todo mundo, o ideal é falar com
-                personalidade. Mostrar processo, atenção aos detalhes e o tipo
-                de arte que você entrega.
-              </p>
+                  <p>
+                    Essa seção serve para gerar confiança sem competir com o
+                    impacto visual do site.
+                  </p>
 
-              <p>
-                Se quiser depois eu monto esse texto de forma pesada, elegante e
-                com cara real de marca premium.
-              </p>
-            </div>
-          </section>
-        )}
-
-        {secao === "studio" && (
-          <section className="text-page">
-            <div className="section-top">
-              <span className="small-tag">ESPAÇO</span>
-              <h2>Studio</h2>
-            </div>
-
-            <div className="text-card">
-              <p>
-                Aqui entra o ambiente, a estrutura, os cuidados com higiene, o
-                conforto e o diferencial da experiência.
-              </p>
-
-              <p>
-                Em site de estúdio, essa parte é importante para gerar
-                confiança. Cliente quer sentir que está entrando em um lugar com
-                padrão alto, organização e identidade.
-              </p>
-
-              <p>
-                Quando quiser, eu também posso transformar essa seção em algo
-                muito mais pesado visualmente, com cards, imagens e blocos de
-                destaque.
-              </p>
-            </div>
+                  <p>
+                    O mais importante agora é: o fundo continua aparecendo, o
+                    layout continua limpo e a funcionalidade continua existindo.
+                  </p>
+                </div>
+              </div>
+            )}
           </section>
         )}
       </main>
+
+      {modalAberto && imagens.length > 0 && (
+        <div className="modal-overlay" onClick={fecharModal}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" onClick={fecharModal}>
+              <FaTimes />
+            </button>
+
+            <button className="modal-nav modal-prev" onClick={imagemAnterior}>
+              <FaChevronLeft />
+            </button>
+
+            <div className="modal-image-box">
+              <img
+                src={`http://localhost:3000${imagens[imagemAtual].nome}`}
+                alt={imagens[imagemAtual].titulo || "Tattoo"}
+                className="modal-image"
+              />
+
+              <div className="modal-caption">
+                <h3>{imagens[imagemAtual].titulo || "Lamort Tattoo"}</h3>
+                <p>
+                  {imagemAtual + 1} / {imagens.length}
+                </p>
+              </div>
+            </div>
+
+            <button className="modal-nav modal-next" onClick={proximaImagem}>
+              <FaChevronRight />
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
