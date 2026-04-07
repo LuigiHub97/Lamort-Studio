@@ -1,4 +1,4 @@
-import GalleryGrid from "./GalleryGrid";
+import TattooCarousel from "./TattooCarousel";
 import { siteContent } from "../data/siteContent";
 
 function ContentPanel({
@@ -44,7 +44,7 @@ function ContentPanel({
           )}
 
           {!loading && imagens.length > 0 && (
-            <GalleryGrid imagens={imagens} abrirModal={abrirModal} />
+            <TattooCarousel imagens={imagens} abrirModal={abrirModal} />
           )}
         </div>
       )}
