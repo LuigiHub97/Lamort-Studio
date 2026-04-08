@@ -9,7 +9,7 @@ A proposta foi criar uma interface simples, com navegação clara e destaque tot
 ## Funcionalidades
 
 * Galeria de imagens carregada via API
-* Carrousel com navegação entre as artes
+* Carrosel com navegação entre as artes
 * Visualização ampliada em modal
 * Layout responsivo (desktop e mobile)
 * Contato direto via WhatsApp
