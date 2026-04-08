@@ -1,45 +1,122 @@
-🖤 Lamort Tattoo Studio
-Projeto de site para um estúdio de tatuagem, desenvolvido com foco em identidade visual forte e experiência mais imersiva.
+# Lamort Tattoo Studio
 
-A ideia principal foi fugir de site “cheio de informação” e criar algo mais limpo, onde o conteúdo aparece conforme o usuário interage, deixando o visual em destaque.
+Site desenvolvido para um estúdio de tatuagem com foco em portfólio visual e identidade estética.
 
-🧠 Sobre o projeto
-Esse projeto surgiu como prática de front-end, mas acabou evoluindo para algo mais próximo de um projeto real.
+A proposta foi criar uma interface simples, com navegação clara e destaque total para as artes, evitando excesso de informação na tela.
 
-Durante o desenvolvimento, trabalhei bastante em:
+---
 
-organização da interface
-navegação por seções
-consumo de API
-ajustes de layout com base em feedback
-A principal mudança foi reduzir a quantidade de conteúdo visível na tela e dar mais espaço para o fundo e a identidade visual.
+## Funcionalidades
 
-💻 Tecnologias
-React
-JavaScript
-HTML5
-CSS3
-API REST
+* Galeria de imagens carregada via API
+* Carrosel com navegação entre as artes
+* Visualização ampliada em modal
+* Layout responsivo (desktop e mobile)
+* Contato direto via WhatsApp
+* Links para redes sociais
 
-⚙️ O que o projeto faz
-Navegação por seções (sem recarregar a página)
-Galeria dinâmica carregada via API
-Modal para visualizar imagens maiores
-Navegação por teclado no modal
-Layout responsivo
-Conteúdo exibido apenas quando necessário (menu lateral + painel)
+---
 
-🔌 API
-A galeria consome dados de uma API local:
+## Tecnologias
 
-http://localhost:5000/api/galeria
+Frontend:
 
-As imagens são carregadas dinamicamente e exibidas em grid.
+* React
+* CSS
 
+Backend:
 
-📦 Como rodar
+* Node.js
+* Express
+* Multer
+* FS (leitura de arquivos locais)
 
-git clone https://github.com/LuigiHub97/Lamort-Studio
-cd Lamort-Studio
+---
+
+## Estrutura
+
+```
+frontend/
+backend/
+```
+
+* frontend: aplicação React
+* backend: API responsável pela galeria
+
+---
+
+## Como rodar o projeto
+
+### Backend
+
+```
+cd backend
+npm install
+node server.js
+```
+
+Disponível em:
+
+```
+http://localhost:5000
+```
+
+---
+
+### Frontend
+
+```
+cd LAMORTA-TATOO
 npm install
 npm start
+```
+
+Disponível em:
+
+```
+http://localhost:3000
+```
+
+---
+
+## Acesso via celular
+
+Na mesma rede, utilize o IP da máquina:
+
+```
+http://SEU-IP:3000
+```
+
+Exemplo:
+
+```
+http://192.168.0.5:3000
+```
+
+---
+
+## Galeria
+
+As imagens ficam em:
+
+```
+backend/uploads/galeria
+```
+
+Também é possível enviar imagens via endpoint:
+
+```
+POST /api/galeria/upload
+```
+
+---
+
+## Objetivo
+
+Construir uma base sólida e simples para um site de estúdio, com possibilidade de evolução para funcionalidades mais completas, como painel administrativo e integração com banco de dados.
+
+---
+
+## Autor
+
+Luigi
