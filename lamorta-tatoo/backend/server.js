@@ -3,23 +3,22 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import pool from "./db.js";
 import path from "path";
 import multer from "multer";
 import fs from "fs";
 import { fileURLToPath } from "url";
 
+dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-
-
 app.use(cors());
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use(express.json());
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 const pastaGaleria = path.join(__dirname, "uploads", "galeria");
 
@@ -39,29 +38,58 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-// Rota de teste
 app.get("/api/test", (req, res) => {
-  res.json({ message: "API funcionando!" });
+  res.json({ message: "API NOVA FUNCIONANDO AGORA" });
 });
 
-// Rota GET da galeria (dados fixos por enquanto)
-app.get("/api/galeria", async (req, res) => {
+app.get("/api/galeria", (req, res) => {
   try {
-    const resultado = await pool.query("SELECT * FROM galeria");
-    res.json(resultado.rows);
+    console.log("PASTA GALERIA:", pastaGaleria);
+
+    const arquivos = fs.readdirSync(pastaGaleria);
+    console.log("ARQUIVOS ENCONTRADOS:", arquivos);
+
+    const extensoesValidas = [".jpg", ".jpeg", ".png", ".webp", ".gif"];
+
+    const imagens = arquivos
+      .filter((arquivo) =>
+        extensoesValidas.includes(path.extname(arquivo).toLowerCase())
+      )
+      .map((arquivo, index) => ({
+        id: index + 1,
+        nome: arquivo,
+        url: `${req.protocol}://${req.get("host")}/uploads/galeria/${arquivo}`,
+      }));
+
+    res.json(imagens);
   } catch (err) {
     console.error("Erro ao buscar galeria:", err);
     res.status(500).json({ error: "Erro ao buscar galeria" });
   }
 });
 
-pool.query("SELECT NOW()", (err, res) => {
-  if (err) {
-    console.error("Erro ao conectar no banco:", err);
-  } else {
-    console.log("Conexão com banco funcionando, hora atual:", res.rows[0]);
+app.post("/api/galeria/upload", upload.single("imagem"), (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({ error: "Nenhuma imagem enviada" });
+    }
+
+    const imagem = {
+      nome: req.file.filename,
+      url: `${req.protocol}://${req.get("host")}/uploads/galeria/${req.file.filename}`,
+    };
+
+    res.status(201).json({
+      message: "Imagem enviada com sucesso!",
+      imagem,
+    });
+  } catch (err) {
+    console.error("Erro no upload da imagem:", err);
+    res.status(500).json({ error: "Erro ao fazer upload da imagem" });
   }
 });
+
+console.log("ANTES DO LISTEN");
 
 app.listen(PORT, () => {
   console.log(`Backend rodando na porta ${PORT}`);

@@ -26,11 +26,6 @@ function ContentPanel({
           <div className="section-top">
             <span className="small-tag">PORTFÓLIO</span>
             <h2>Galeria</h2>
-            <p>
-              Trabalhos selecionados do Lamort Tattoo Studio. A ideia aqui é
-              deixar o fundo respirar e abrir o portfólio só quando a pessoa
-              quiser ver.
-            </p>
           </div>
 
           {loading && (

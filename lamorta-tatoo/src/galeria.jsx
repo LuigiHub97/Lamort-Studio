@@ -10,11 +10,14 @@ function Galeria() {
       setAberta(true);
       setLoading(true);
 
-      const res = await fetch(
-        "https://animated-space-zebra-pjvxv97p5rqqf7ppg-5000.app.github.dev/api/galeria",
-      );
+      const res = await fetch("http://localhost:5000/api/galeria");
+
+      if (!res.ok) {
+        throw new Error(`Erro HTTP: ${res.status}`);
+      }
 
       const data = await res.json();
+      console.log("Dados da galeria:", data);
       setGaleria(data);
     } catch (err) {
       console.log("Erro ao carregar galeria:", err);
@@ -29,10 +32,8 @@ function Galeria() {
 
   return (
     <div>
-      {/* BOTÃO ABRIR */}
       <button onClick={abrirGaleria}>Galeria</button>
 
-      {/* MODAL / TELA DA GALERIA */}
       {aberta && (
         <div className="galeria-overlay">
           <button className="close-btn" onClick={fecharGaleria}>
@@ -41,9 +42,21 @@ function Galeria() {
 
           {loading && <p>Carregando galeria...</p>}
 
+          {!loading && galeria.length === 0 && (
+            <p>Nenhuma imagem encontrada.</p>
+          )}
+
           <div className="galeria-container">
             {galeria.map((item) => (
-              <img key={item.id} src={item.url} alt="tattoo" />
+              <img
+                key={item.id}
+                src={item.url}
+                alt={item.nome || "tattoo"}
+                onError={(e) => {
+                  console.log("Erro ao carregar imagem:", item.url);
+                  e.target.style.display = "none";
+                }}
+              />
             ))}
           </div>
         </div>

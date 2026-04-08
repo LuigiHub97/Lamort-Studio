@@ -43,7 +43,14 @@ function App() {
     if (nome === "galeria" && imagens.length === 0) {
       await carregarGaleria();
     }
-  }
+
+     setTimeout(() => {
+    const painel = document.querySelector(".content-panel");
+    if (painel && window.innerWidth <= 960) {
+      painel.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, 150);
+}
 
   function fecharPainel() {
     setSecao(null);

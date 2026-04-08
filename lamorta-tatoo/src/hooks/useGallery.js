@@ -8,7 +8,7 @@ export function useGallery() {
     try {
       setLoading(true);
 
-      const res = await fetch("http://localhost:5000/api/galeria");
+      const res = await fetch("http://192.168.0.5:5000/api/galeria");
 
       if (!res.ok) {
         throw new Error("Erro ao buscar galeria");

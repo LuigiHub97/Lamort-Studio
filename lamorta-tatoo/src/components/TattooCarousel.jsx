@@ -33,8 +33,8 @@ function TattooCarousel({ imagens, abrirModal }) {
       <div className="carousel-content">
         <article className="carousel-side-card" onClick={voltar}>
           <img
-            src={`http://localhost:3000${imagemAnterior.nome}`}
-            alt={imagemAnterior.titulo || "Lamort Tattoo"}
+            src={imagemAnterior.url}
+            alt={imagemAnterior.titulo || imagemAnterior.nome || "Lamort Tattoo"}
           />
         </article>
 
@@ -43,8 +43,8 @@ function TattooCarousel({ imagens, abrirModal }) {
           onClick={() => abrirModal(indexAtual)}
         >
           <img
-            src={`http://localhost:3000${imagemAtual.nome}`}
-            alt={imagemAtual.titulo || "Lamort Tattoo"}
+            src={imagemAtual.url}
+            alt={imagemAtual.titulo || imagemAtual.nome || "Lamort Tattoo"}
           />
 
           <div className="carousel-overlay">
@@ -56,8 +56,8 @@ function TattooCarousel({ imagens, abrirModal }) {
 
         <article className="carousel-side-card" onClick={avancar}>
           <img
-            src={`http://localhost:3000${imagemProxima.nome}`}
-            alt={imagemProxima.titulo || "Lamort Tattoo"}
+            src={imagemProxima.url}
+            alt={imagemProxima.titulo || imagemProxima.nome || "Lamort Tattoo"}
           />
         </article>
       </div>

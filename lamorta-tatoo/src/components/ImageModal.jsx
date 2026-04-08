@@ -7,6 +7,10 @@ function ImageModal({
   proximaImagem,
   imagemAnterior,
 }) {
+  if (!imagens || imagens.length === 0 || !imagens[imagemAtual]) {
+    return null;
+  }
+
   return (
     <div className="modal-overlay" onClick={fecharModal}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
@@ -20,20 +24,10 @@ function ImageModal({
 
         <div className="modal-image-box">
           <img
-            src={`http://localhost:3000${imagens[imagemAtual].nome}`}
-            alt={imagens[imagemAtual].titulo || "Tattoo"}
+            src={imagens[imagemAtual].url}
+            alt={imagens[imagemAtual].titulo || imagens[imagemAtual].nome || "Tattoo"}
             className="modal-image"
-            onMouseMove={(e) => {
-              const { left, top, width, height } = e.target.getBoundingClientRect();
-              const x = ((e.clientX - left) / width) * 100;
-              const y = ((e.clientY - top) / height) * 100;
-
-    e.target.style.transformOrigin = `${x}% ${y}%`;
-  }}
-  onMouseLeave={(e) => {
-    e.target.style.transformOrigin = "center";
-  }}
-/>
+          />
 
           <div className="modal-caption">
             <h3>{imagens[imagemAtual].titulo || "Lamort Tattoo"}</h3>
