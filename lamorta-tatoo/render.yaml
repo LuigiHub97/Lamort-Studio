@@ -3,7 +3,7 @@ services:
     name: lamorta-backend
     runtime: node
     plan: free
-    rootDir: backend
+    rootDir: lamorta-tattoo/backend
     buildCommand: npm install
     startCommand: npm start
     envVars:
