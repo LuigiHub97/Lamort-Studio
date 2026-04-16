@@ -8,7 +8,8 @@ export function useGallery() {
     try {
       setLoading(true);
 
-      const res = await fetch("http://192.168.0.5:5000/api/galeria");
+      const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:5000";
+      const res = await fetch(`${apiUrl}/api/galeria`);
 
       if (!res.ok) {
         throw new Error("Erro ao buscar galeria");
