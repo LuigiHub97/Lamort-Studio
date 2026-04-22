@@ -3,12 +3,12 @@
   "installCommand": "npm install",
   "outputDirectory": "build",
   "env": {
-    "REACT_APP_API_URL": "@api_url"
+    "REACT_APP_API_URL": "https://lamort-api.onrender.com"
   },
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://seu-backend-url.com/api/:path*"
+      "destination": "https://lamort-api.onrender.com/api/:path*"
     }
   ]
 }
