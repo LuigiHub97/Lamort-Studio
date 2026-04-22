@@ -8,7 +8,7 @@ export function useGallery() {
     try {
       setLoading(true);
 
-      const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:5000";
+      const apiUrl = process.env.REACT_APP_API_URL || "https://lamort-api.onrender.com/";
       const res = await fetch(`${apiUrl}/api/galeria`);
 
       if (!res.ok) {
