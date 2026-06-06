@@ -1,122 +1,87 @@
-# Lamort Tattoo Studio
+# Lamort Studio 🖤
 
-Site desenvolvido para um estúdio de tatuagem com foco em portfólio visual e identidade estética.
+Site desenvolvido para um estúdio de tatuagem — com foco em portfólio visual, identidade estética e contato direto com o cliente.
 
-A proposta foi criar uma interface simples, com navegação clara e destaque total para as artes, evitando excesso de informação na tela.
+**[→ Ver projeto ao vivo](https://lamort-studio.vercel.app)**
+
+---
+
+## Sobre o projeto
+
+A ideia era simples: criar um espaço online que representasse o trabalho do estúdio sem poluição visual. Galeria limpa, navegação direta e acesso rápido ao WhatsApp para quem quiser agendar.
+
+O projeto tem frontend em React e um backend próprio em Node.js que serve as imagens da galeria via API — sem depender de serviços externos para o gerenciamento de fotos.
 
 ---
 
 ## Funcionalidades
 
-* Galeria de imagens carregada via API
-* Carrosel com navegação entre as artes
-* Visualização ampliada em modal
-* Layout responsivo (desktop e mobile)
-* Contato direto via WhatsApp
-* Links para redes sociais
+- 🖼 Galeria de trabalhos carregada via API
+- 🔄 Carrossel de imagens com navegação entre artes
+- 🔍 Modal para visualização ampliada
+- 📱 Layout responsivo (desktop e mobile)
+- 💬 Botão de contato direto pelo WhatsApp
+- 🔗 Links para redes sociais
 
 ---
 
-## Tecnologias
+## Stack
 
-Frontend:
+**Frontend**
+- React
+- CSS
 
-* React
-* CSS
-
-Backend:
-
-* Node.js
-* Express
-* Multer
-* FS (leitura de arquivos locais)
+**Backend**
+- Node.js
+- Express
+- Multer (upload de imagens)
+- FS (leitura local de arquivos)
 
 ---
 
-## Estrutura
+## Como rodar localmente
 
+**Pré-requisitos:** Node.js instalado
+
+```bash
+# Clone o repositório
+git clone https://github.com/LuigiHub97/Lamort-Studio.git
+cd Lamort-Studio
 ```
-frontend/
-backend/
-```
 
-* frontend: aplicação React
-* backend: API responsável pela galeria
-
----
-
-## Como rodar o projeto
-
-### Backend
-
-```
+**Backend** (roda na porta 5000)
+```bash
 cd backend
 npm install
 node server.js
 ```
 
-Disponível em:
-
-```
-http://localhost:5000
-```
-
----
-
-### Frontend
-
-```
-cd LAMORTA-TATOO
+**Frontend** (roda na porta 3000)
+```bash
+cd frontend
 npm install
 npm start
 ```
 
-Disponível em:
+> Para acessar pelo celular na mesma rede, use o IP da máquina no lugar de `localhost` — ex: `http://192.168.0.5:3000`
+
+---
+
+## Estrutura do projeto
 
 ```
-http://localhost:3000
+Lamort-Studio/
+├── frontend/        # Aplicação React
+├── backend/         # API de galeria
+│   └── uploads/
+│       └── galeria/ # Imagens armazenadas localmente
+└── pages/
+    └── api/         # Rotas da API
 ```
 
 ---
 
-## Acesso via celular
+## Feito por
 
-Na mesma rede, utilize o IP da máquina:
+[Luigi Scaglione](https://github.com/LuigiHub97) — aberto a feedbacks e sugestões.
 
-```
-http://SEU-IP:3000
-```
-
-Exemplo:
-
-```
-http://192.168.0.5:3000
-```
-
----
-
-## Galeria
-
-As imagens ficam em:
-
-```
-backend/uploads/galeria
-```
-
-Também é possível enviar imagens via endpoint:
-
-```
-POST /api/galeria/upload
-```
-
----
-
-## Objetivo
-
-Construir uma base sólida e simples para um site de estúdio, com possibilidade de evolução para funcionalidades mais completas, como painel administrativo e integração com banco de dados.
-
----
-
-## Autor
-
-Luigi
